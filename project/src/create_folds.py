@@ -2,12 +2,13 @@
 ## here, using kfold as all the classes are even; use stratified if the data is skewed
 ## pg no 23 - AAAMLP
 
+import os
 import pandas as pd
 from sklearn import model_selection
 
 if __name__ == "__main__":
     # Reading the input data
-    df = pd.read_csv("input/input.csv")      # 60000 rows
+    df = pd.read_csv("input/input.csv")      # 70000 rows
 
     # Creating a new column kfolds and filling it with -1
     df["kfold"] = -1
@@ -17,7 +18,7 @@ if __name__ == "__main__":
     df.reset_index(drop=True, inplace=True)
 
     # Creating Kfold object from model_selection
-    kf = model_selection.KFold(n_splits=7)
+    kf = model_selection.KFold(n_splits=10)
 
     # Fill the kfold column with corresponding k-th value
     for fold, (trn_, val_) in enumerate(kf.split(X = df)):
